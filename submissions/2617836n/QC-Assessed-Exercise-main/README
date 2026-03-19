@@ -1,0 +1,33 @@
+# UoG-QC-Assignment
+University of Glasgow course Quantum Computing (H)
+
+This repository is a template for the assessed exercise for the course Quantum Computing (H) at the University of Glasgow, School of Computing Science.
+
+Create your own repository as a copy of the template, then work on the exercise.
+
+To submit the exercise, give Simon Gay access to your repository (user name: SimonGay)
+
+As usual, you can use the "Launch in qBraid" button to open your repository within the qBraid environment.
+
+[<img src="https://qbraid-static.s3.amazonaws.com/logos/Launch_on_qBraid_white.png" width="150">](https://account.qbraid.com?gitHubUrl=https://github.com/SimonGay/UoG-QC-Assignment.git)
+
+
+Student ID: 2617836n
+
+This coursework involved implementing a simulation of the E91 QKD protocol using Qiskit. Two versions of the protocol have been implemented:
+- Plain E91 protocol - Alice and Bob share entangled qubits and generate a secure key while verifying entanglement using the Bell inequality.
+- E91 with an attacker - An attacker is added that measures Bob's qubit before Bob receives it, demonstrating how an eavesdropper disrupts entanglement and introduces errors into the key.
+
+Protocol Description:
+
+The E91 protocol relies on pairs of entangled qubits shared between Alice and Bob.
+For each round:
+1. An entangled pair of qubits is generated using generateEntangledPair().
+2. Alice and Bob randomly choose measurement bases. A quantum circuit using a unitary gate and a Hadamard gate is used to generate three basis choices with equal probability (1/3 each), avoiding classical randomness.
+3. They measure their qubits using the selected bases.
+4. After 9N/2 rounds, they reveal their basis choices to determine:
+    - which rounds contribute to the shared key
+    - which rounds are used to test the Bell inequality violations
+If the system remains entangled, the Bell inequality value S should be close to 2√2 which can be seen in the results of the plain E91 implementation. 
+
+In the attacker implementation, an intercept–measure attack is simulated where the attacker measures Bob's qubit before it reaches him. This measurement collapses the entangled state and destroys the quantum correlations between Alice and Bob. As a result, the calculated value of S falls below 2, indicating that the entanglement has been disrupted and the presence of an eavesdropper can be detected.
